@@ -1,4 +1,5 @@
 import Display from "./display";
+import Button from "./button";
 
 export default function Calculator() {
   return (
@@ -6,6 +7,7 @@ export default function Calculator() {
       {/* props needed: */}
       {/* - displayValue (string) */}
       <Display displayValue="10" />
+      <Button color="dark grey" text="5" />
 
       {/* props needed: */}
       {/* - displayValue (string) */}
