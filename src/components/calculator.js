@@ -4,8 +4,6 @@ import Button from "./button";
 export default function Calculator() {
   return (
     <div>
-      {/* props needed: */}
-      {/* - displayValue (string) */}
       <Display displayValue="10" />
       <Button color="dark grey" text="5" />
 
