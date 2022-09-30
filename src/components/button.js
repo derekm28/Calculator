@@ -1,4 +1,4 @@
-import { addition, subtraction, multiply, division } from "../helpers/math";
+import { addition, subtraction, multiply, division, percentage } from "../helpers/math";
 
 export default function Button(props) {
   //should return a circle with text in it
