@@ -6,6 +6,12 @@ import Button from "./button";
 export default function Calculator() {
   const [displayValue, setDisplayValue] = useState(0);
 
+  const calculateResult = () => {
+    // calculate result of prevValue and action
+    // store result as new prevValue
+    // store result as new displayValue
+  };
+
   const updateDisplayValue = (inputValue) => {
     let updatedDisplayValue = displayValue;
 
@@ -18,113 +24,74 @@ export default function Calculator() {
         }
         break;
 
-        {
-          /* TODO: Add remaining cases */
-        }
       case "clear":
-        if(<Button text = "AC"/>){
-          updateDisplayValue = 0;
-        }
-        else {
-
+        if ((<Button text="AC" />)) {
+          updatedDisplayValue = "0";
+        } else {
         }
         break;
 
-
-      case "%":
-        if(<Button text = "%" />){
-          updateDisplayValue = /** ??? */0;
+      case "0":
+        if (inputValue === "0") {
+          updatedDisplayValue += inputValue;
         }
         break;
 
-      case "/":
-        if(<Button text = "/" />){
-
+      case "1":
+        if (inputValue === "1") {
+          updatedDisplayValue += "1";
         }
         break;
 
-      case "*":
-          if(<Button text = "*" />){
-
-          }
-          break;
-
-      case "+":
-            if(<Button text = "+" />){
-
-            }
-            break;
-
-      case "-":
-        if(<Button text = "-" />){
-
+      case "2":
+        if (inputValue === "2") {
+          updatedDisplayValue += "2";
         }
         break;
 
-        case "0":
-          if(inputValue === "0"){
-            updatedDisplayValue += inputValue;
-          }
-          break;
-
-          case "1":
-        if(inputValue === "1"){
-          updateDisplayValue = 1;
+      case "3":
+        if (inputValue === "3") {
+          updatedDisplayValue += "3";
         }
         break;
 
-        case "2":
-        if(inputValue === "2"){
-          updateDisplayValue = 2;
+      case "4":
+        if (inputValue === "4") {
+          updatedDisplayValue += "4";
         }
         break;
 
-        case "3":
-        if(inputValue === "3"){
-          updateDisplayValue = 3;
+      case "5":
+        if (inputValue === "5") {
+          updatedDisplayValue += "5";
         }
         break;
 
-        case "4":
-        if(inputValue === "4"){
-          updateDisplayValue = 4;
+      case "6":
+        if (inputValue === "6") {
+          updatedDisplayValue += "6";
         }
         break;
 
-        case "5":
-        if(inputValue === "5"){
-          updateDisplayValue = 5;
+      case "7":
+        if (inputValue === "7") {
+          updatedDisplayValue += "7";
         }
         break;
 
-        case "6":
-        if(inputValue === "6"){
-          updateDisplayValue = 6;
+      case "8":
+        if (inputValue === "8") {
+          updatedDisplayValue += "8";
         }
         break;
 
-        case "7":
-        if(inputValue === "7"){
-          updateDisplayValue = 7;
+      case "9":
+        if (inputValue === "9") {
+          updatedDisplayValue += "9";
         }
         break;
 
-        case "8":
-        if(inputValue === "8">){
-          updateDisplayValue = 8;
-        }
-        break;
-
-        case "9":
-        if(inputValue === "9"){
-          updateDisplayValue = 9;
-        }
-        break;
-
-
-
-        default:
-
+      default:
     }
 
     setDisplayValue(updatedDisplayValue);
@@ -133,7 +100,6 @@ export default function Calculator() {
   return (
     <div>
       <Display displayValue={displayValue} />
-      {/* TODO: Add remaining buttons */}
       <Button
         color="dark grey"
         text="0"
