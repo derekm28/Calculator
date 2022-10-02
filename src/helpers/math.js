@@ -14,7 +14,7 @@ module.exports = {
   percentage: (x, y) => {
     return (y / x) * 100;
   },
-  equals: (x, y){
-    return ('?');
-  }
+  equals: (x, y) => {
+    return "?";
+  },
 };
