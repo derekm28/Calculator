@@ -1,15 +1,42 @@
 import { useState } from "react";
-
+import { division } from "../helpers/math";
 import Display from "./display";
 import Button from "./button";
 
 export default function Calculator() {
   const [displayValue, setDisplayValue] = useState(0);
+  const [previousValue, setPrevValue] = useState(0);
+  // TODO: add state for previous value
 
-  const calculateResult = () => {
+  const calculateResult = (symbol) => {
+    let tempResult = 0;
     // calculate result of prevValue and action
-    // store result as new prevValue
-    // store result as new displayValue
+    // TODO: add missing cases
+    switch (symbol) {
+      case "/":
+        tempResult = division(previousValue, parseFloat(displayValue));
+        break;
+
+      case "*":
+        break;
+
+      case "+":
+        break;
+
+      case "-":
+        break;
+
+      case "=":
+        break;
+
+      default:
+        // do nothing
+        break;
+    }
+
+    // TODO: save tempResult
+    // TODO: store result as new prevValue
+    // TODO: store result as new displayValue
   };
 
   const updateDisplayValue = (inputValue) => {
@@ -155,30 +182,27 @@ export default function Calculator() {
         text="+/−"
         function={() => updateDisplayValue("")}
       />
-      <Button
-        color="orange"
-        text="*"
-        function={(multiply) => updateDisplayValue("0")}
-      />
+      {/* TODO: Update function prop for all orange buttons */}
+      <Button color="orange" text="*" function={() => calculateResult("*")} />
       <Button
         color="orange"
         text="+"
-        function={(addition) => updateDisplayValue("0")}
+        function={() => updateDisplayValue("0")}
       />
       <Button
         color="orange"
         text="-"
-        function={(subtraction) => updateDisplayValue("0")}
+        function={() => updateDisplayValue("0")}
       />
       <Button
         color="orange"
         text="/"
-        function={(division) => updateDisplayValue("0")}
+        function={() => updateDisplayValue("0")}
       />
       <Button
         color="orange"
         text="="
-        function={(equals) => updateDisplayValue("0")}
+        function={() => updateDisplayValue("0")}
       />
     </div>
   );
