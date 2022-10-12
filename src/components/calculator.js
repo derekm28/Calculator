@@ -1,32 +1,46 @@
 import { useState } from "react";
-import { division } from "../helpers/math";
+import { division, addition, subtraction, multiply, equals } from "../helpers/math";
 import Display from "./display";
 import Button from "./button";
 
 export default function Calculator() {
   const [displayValue, setDisplayValue] = useState(0);
-  const [previousValue, setPrevValue] = useState(0);
+  const [previousValue, setPreviousValue] = useState(displayValue);
   // TODO: add state for previous value
 
   const calculateResult = (symbol) => {
-    let tempResult = 0;
+    let tempResult = displayValue;
+
     // calculate result of prevValue and action
     // TODO: add missing cases
     switch (symbol) {
       case "/":
         tempResult = division(previousValue, parseFloat(displayValue));
+        setDisplayValue(tempResult);
+        setPreviousValue(tempResult);
         break;
 
       case "*":
+        tempResult = multiply(previousValue, parseFloat(displayValue));
+        setDisplayValue(tempResult);
+        setPreviousValue(tempResult);
         break;
 
       case "+":
+        tempResult = addition(previousValue, parseFloat(displayValue));
+        setDisplayValue(tempResult);
+        setPreviousValue(tempResult);
         break;
 
       case "-":
+        tempResult = subtraction(previousValue, parseFloat(displayValue));
+        setDisplayValue(tempResult);
+        setPreviousValue(tempResult);
         break;
 
       case "=":
+        setDisplayValue(tempResult);
+        setPreviousValue(tempResult);
         break;
 
       default:
@@ -183,26 +197,29 @@ export default function Calculator() {
         function={() => updateDisplayValue("")}
       />
       {/* TODO: Update function prop for all orange buttons */}
-      <Button color="orange" text="*" function={() => calculateResult("*")} />
+      <Button
+        color="orange"
+        text="*"
+        function={(multiply) => calculateResult("*")} />
       <Button
         color="orange"
         text="+"
-        function={() => updateDisplayValue("0")}
+        function={(addition) => calculateResult("+")}
       />
       <Button
         color="orange"
         text="-"
-        function={() => updateDisplayValue("0")}
+        function={(subtraction) => calculateResult("-")}
       />
       <Button
         color="orange"
         text="/"
-        function={() => updateDisplayValue("0")}
+        function={(division) => calculateResult("/")}
       />
       <Button
         color="orange"
         text="="
-        function={() => updateDisplayValue("0")}
+        function={() => calculateResult("=")}
       />
     </div>
   );
