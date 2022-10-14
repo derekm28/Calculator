@@ -1,12 +1,18 @@
-import { addition, subtraction, multiply, division } from "../helpers/math";
+import {
+  addition,
+  subtraction,
+  multiply,
+  division,
+  percentage,
+} from "../helpers/math";
 
 export default function Button(props) {
   //should return a circle with text in it
   return (
     <div className="Button">
-      <Button onClick={props.function} color={props.color}>
+      <button onClick={props.function} color={props.color}>
         {props.text}
-      </Button>
+      </button>
     </div>
   );
 }
