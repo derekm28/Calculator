@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { division, addition, subtraction, multiply, equals } from "../helpers/math";
+import { division, addition, subtraction, multiply } from "../helpers/math";
 import Display from "./display";
 import Button from "./button";
 
@@ -197,30 +197,11 @@ export default function Calculator() {
         function={() => updateDisplayValue("")}
       />
       {/* TODO: Update function prop for all orange buttons */}
-      <Button
-        color="orange"
-        text="*"
-        function={(multiply) => calculateResult("*")} />
-      <Button
-        color="orange"
-        text="+"
-        function={(addition) => calculateResult("+")}
-      />
-      <Button
-        color="orange"
-        text="-"
-        function={(subtraction) => calculateResult("-")}
-      />
-      <Button
-        color="orange"
-        text="/"
-        function={(division) => calculateResult("/")}
-      />
-      <Button
-        color="orange"
-        text="="
-        function={() => calculateResult("=")}
-      />
+      <Button color="orange" text="*" function={() => calculateResult("*")} />
+      <Button color="orange" text="+" function={() => calculateResult("+")} />
+      <Button color="orange" text="-" function={() => calculateResult("-")} />
+      <Button color="orange" text="/" function={() => calculateResult("/")} />
+      <Button color="orange" text="=" function={() => calculateResult("=")} />
     </div>
   );
 }
