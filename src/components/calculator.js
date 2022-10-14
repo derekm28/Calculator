@@ -12,35 +12,24 @@ export default function Calculator() {
     let tempResult = displayValue;
 
     // calculate result of prevValue and action
-    // TODO: add missing cases
     switch (symbol) {
       case "/":
         tempResult = division(previousValue, parseFloat(displayValue));
-        setDisplayValue(tempResult);
-        setPreviousValue(tempResult);
         break;
 
       case "*":
         tempResult = multiply(previousValue, parseFloat(displayValue));
-        setDisplayValue(tempResult);
-        setPreviousValue(tempResult);
         break;
 
       case "+":
         tempResult = addition(previousValue, parseFloat(displayValue));
-        setDisplayValue(tempResult);
-        setPreviousValue(tempResult);
         break;
 
       case "-":
         tempResult = subtraction(previousValue, parseFloat(displayValue));
-        setDisplayValue(tempResult);
-        setPreviousValue(tempResult);
         break;
 
       case "=":
-        setDisplayValue(tempResult);
-        setPreviousValue(tempResult);
         break;
 
       default:
@@ -48,9 +37,8 @@ export default function Calculator() {
         break;
     }
 
-    // TODO: save tempResult
-    // TODO: store result as new prevValue
-    // TODO: store result as new displayValue
+    setDisplayValue(tempResult);
+    setPreviousValue(tempResult);
   };
 
   const updateDisplayValue = (inputValue) => {
