@@ -11,4 +11,10 @@ module.exports = {
   division: (x, y) => {
     return x / y;
   },
+  percentage: (x, y) => {
+    return (y / x) * 100;
+  },
+  equals: (x, y) => {
+    return "?";
+  },
 };
