@@ -4,32 +4,29 @@ import Display from "./display";
 import Button from "./button";
 
 export default function Calculator() {
+  const [mathSymbol, setMathSymbol] = useState(null);
   const [displayValue, setDisplayValue] = useState(0);
   const [previousValue, setPreviousValue] = useState(displayValue);
-  // TODO: add state for previous value
 
-  const calculateResult = (symbol) => {
+  const calculateResult = () => {
     let tempResult = displayValue;
 
     // calculate result of prevValue and action
-    switch (symbol) {
+    switch (mathSymbol) {
       case "/":
-        tempResult = division(previousValue, parseFloat(displayValue));
+        tempResult = division(previousValue, displayValue);
         break;
 
       case "*":
-        tempResult = multiply(previousValue, parseFloat(displayValue));
+        tempResult = multiply(previousValue, displayValue);
         break;
 
       case "+":
-        tempResult = addition(previousValue, parseFloat(displayValue));
+        tempResult = addition(previousValue, displayValue);
         break;
 
       case "-":
-        tempResult = subtraction(previousValue, parseFloat(displayValue));
-        break;
-
-      case "=":
+        tempResult = subtraction(previousValue, displayValue);
         break;
 
       default:
@@ -51,6 +48,10 @@ export default function Calculator() {
         } else {
           updatedDisplayValue += inputValue;
         }
+        break;
+
+      case "+/-":
+        updatedDisplayValue *= -1;
         break;
 
       case "clear":
@@ -123,12 +124,31 @@ export default function Calculator() {
       default:
     }
 
-    setDisplayValue(updatedDisplayValue);
+    setDisplayValue(parseFloat(updatedDisplayValue));
+  };
+
+  const handleSymbolPress = (symbol) => {
+    // set math symbol
+    setMathSymbol(symbol);
+    // set previous value
+    setPreviousValue(displayValue);
+    // clear the display
+    setDisplayValue(0);
   };
 
   return (
     <div>
       <Display displayValue={displayValue} />
+      <Button
+        color="dark grey"
+        text="AC"
+        function={() => updateDisplayValue("clear")}
+      />
+      <Button
+        color="dark grey"
+        text="."
+        function={() => updateDisplayValue(".")}
+      />
       <Button
         color="dark grey"
         text="0"
@@ -181,15 +201,21 @@ export default function Calculator() {
       />
       <Button
         color="dark grey"
-        text="+/−"
-        function={() => updateDisplayValue("")}
+        text="+/-"
+        function={() => updateDisplayValue("+/-")}
       />
-      {/* TODO: Update function prop for all orange buttons */}
-      <Button color="orange" text="*" function={() => calculateResult("*")} />
-      <Button color="orange" text="+" function={() => calculateResult("+")} />
-      <Button color="orange" text="-" function={() => calculateResult("-")} />
-      <Button color="orange" text="/" function={() => calculateResult("/")} />
-      <Button color="orange" text="=" function={() => calculateResult("=")} />
+      <Button color="orange" text="*" function={() => handleSymbolPress("*")} />
+      <Button color="orange" text="+" function={() => handleSymbolPress("+")} />
+      <Button color="orange" text="-" function={() => handleSymbolPress("-")} />
+      <Button color="orange" text="/" function={() => handleSymbolPress("/")} />
+
+      <Button
+        color="orange"
+        text="="
+        function={() => calculateResult(mathSymbol)}
+      />
+      <p>{`mathSymbol: ${mathSymbol}`}</p>
+      <p>{`previousValue: ${previousValue}`}</p>
     </div>
   );
 }
