@@ -128,7 +128,6 @@ export default function Calculator() {
 
   return (
     <div>
-<<<<<<< HEAD
       <Display displayValue="10" />
       <Button color="dark grey" text="5" />
 
@@ -137,70 +136,6 @@ export default function Calculator() {
       {/* - background color (string) */}
       {/* - onClick (function) */}
       {/* <Button /> */}
-=======
-      <Display displayValue={displayValue} />
-      <Button
-        color="dark grey"
-        text="0"
-        function={() => updateDisplayValue("0")}
-      />
-      <Button
-        color="dark grey"
-        text="1"
-        function={() => updateDisplayValue("1")}
-      />
-      <Button
-        color="dark grey"
-        text="2"
-        function={() => updateDisplayValue("2")}
-      />
-      <Button
-        color="dark grey"
-        text="3"
-        function={() => updateDisplayValue("3")}
-      />
-      <Button
-        color="dark grey"
-        text="4"
-        function={() => updateDisplayValue("4")}
-      />
-      <Button
-        color="dark grey"
-        text="5"
-        function={() => updateDisplayValue("5")}
-      />
-      <Button
-        color="dark grey"
-        text="6"
-        function={() => updateDisplayValue("6")}
-      />
-      <Button
-        color="dark grey"
-        text="7"
-        function={() => updateDisplayValue("7")}
-      />
-      <Button
-        color="dark grey"
-        text="8"
-        function={() => updateDisplayValue("8")}
-      />
-      <Button
-        color="light grey"
-        text="9"
-        function={() => updateDisplayValue("9")}
-      />
-      <Button
-        color="dark grey"
-        text="+/−"
-        function={() => updateDisplayValue("")}
-      />
-      {/* TODO: Update function prop for all orange buttons */}
-      <Button color="orange" text="*" function={() => calculateResult("*")} />
-      <Button color="orange" text="+" function={() => calculateResult("+")} />
-      <Button color="orange" text="-" function={() => calculateResult("-")} />
-      <Button color="orange" text="/" function={() => calculateResult("/")} />
-      <Button color="orange" text="=" function={() => calculateResult("=")} />
->>>>>>> c57c83f782fe4fd1f015a9e34cb461e2ab71de92
     </div>
   );
 }
