@@ -36,6 +36,7 @@ export default function Calculator() {
 
     setDisplayValue(tempResult);
     setPreviousValue(tempResult);
+    //
   };
 
   const updateDisplayValue = (inputValue) => {
