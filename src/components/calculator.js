@@ -6,6 +6,8 @@ import Button from "./button";
 export default function Calculator() {
   const [displayValue, setDisplayValue] = useState(0);
   const [previousValue, setPreviousValue] = useState(displayValue);
+  const numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+  const symbols = ['+', '-', '*', '/', '=', "AC", "+/−"];
   // TODO: add state for previous value
 
   const calculateResult = (symbol) => {
@@ -141,6 +143,20 @@ export default function Calculator() {
   return (
     <div>
       <Display displayValue={displayValue} />
+      {numbers.map((number, i) => (
+        <Button
+          color={"dark grey"}
+          text={number}
+          function={() => updateDisplayValue({number})} />
+      ))}
+
+      {symbols.map((symbol, i) => (
+        <Button
+          color={"orange"}
+          text={symbol}
+          function={(tempResult) => calculateResult({symbol})} />
+      ))}
+
       <Button
         color="dark grey"
         text="0"
