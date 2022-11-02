@@ -2,13 +2,13 @@ import { useState } from "react";
 import { division, addition, subtraction, multiply } from "../helpers/math";
 import Display from "./display";
 import Button from "./button";
-import "./calculator.css"
+import "./calculator.css";
 
 export default function Calculator() {
   const [displayValue, setDisplayValue] = useState(0);
   const [previousValue, setPreviousValue] = useState(displayValue);
-  const numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
-  const symbols = ['+', '-', '*', '/', '=', "AC", "+/−"];
+  const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
+  const symbols = ["+", "-", "*", "/", "=", "AC", "+/−"];
   // TODO: add state for previous value
 
   const calculateResult = (symbol) => {
@@ -136,6 +136,7 @@ export default function Calculator() {
         break;
 
       default:
+        console.log("Error, should not reach default");
     }
 
     setDisplayValue(updatedDisplayValue);
@@ -146,85 +147,25 @@ export default function Calculator() {
       <Display displayValue={displayValue} />
       {numbers.map((number, i) => (
         <Button
+          key={`number-${i}`}
           type="button"
           className="numbers"
           color={"dark grey"}
           text={number}
-          function={() => updateDisplayValue({number})} />
+          function={() => updateDisplayValue(number)}
+        />
       ))}
 
       {symbols.map((symbol, i) => (
         <Button
+          key={`symbol-${i}`}
           type="button"
           className="symbols"
           color={"orange"}
           text={symbol}
-          function={(tempResult) => calculateResult({symbol})} />
+          function={() => calculateResult(symbol)}
+        />
       ))}
-
-      <Button
-        color="dark grey"
-        text="0"
-        className="numbers"
-        function={() => updateDisplayValue("0")}
-      />
-      <Button
-        color="dark grey"
-        text="1"
-        className="numbers"
-        function={() => updateDisplayValue("1")}
-      />
-      <Button
-        color="dark grey"
-        text="2"
-        function={() => updateDisplayValue("2")}
-      />
-      <Button
-        color="dark grey"
-        text="3"
-        function={() => updateDisplayValue("3")}
-      />
-      <Button
-        color="dark grey"
-        text="4"
-        function={() => updateDisplayValue("4")}
-      />
-      <Button
-        color="dark grey"
-        text="5"
-        function={() => updateDisplayValue("5")}
-      />
-      <Button
-        color="dark grey"
-        text="6"
-        function={() => updateDisplayValue("6")}
-      />
-      <Button
-        color="dark grey"
-        text="7"
-        function={() => updateDisplayValue("7")}
-      />
-      <Button
-        color="dark grey"
-        text="8"
-        function={() => updateDisplayValue("8")}
-      />
-      <Button
-        color="light grey"
-        text="9"
-        function={() => updateDisplayValue("9")}
-      />
-      <Button
-        color="dark grey"
-        text="+/−"
-        function={() => updateDisplayValue("")}
-      />
-      {/* TODO: Update function prop for all orange buttons */}
-      <Button color="orange" text="*" function={() => calculateResult("*")} />
-      <Button color="orange" text="+" function={() => calculateResult("+")} />
-      <Button color="orange" text="-" function={() => calculateResult("-")} />
-      <Button color="orange" text="/" function={() => calculateResult("/")} />
-      <Button color="orange" text="=" function={() => calculateResult("=")} />
     </div>
   );
 }
