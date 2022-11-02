@@ -2,10 +2,13 @@ import { useState } from "react";
 import { division, addition, subtraction, multiply } from "../helpers/math";
 import Display from "./display";
 import Button from "./button";
+import "./calculator.css"
 
 export default function Calculator() {
   const [displayValue, setDisplayValue] = useState(0);
   const [previousValue, setPreviousValue] = useState(displayValue);
+  const numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+  const symbols = ['+', '-', '*', '/', '=', "AC", "+/−"];
   // TODO: add state for previous value
 
   const calculateResult = (symbol) => {
@@ -141,14 +144,34 @@ export default function Calculator() {
   return (
     <div>
       <Display displayValue={displayValue} />
+      {numbers.map((number, i) => (
+        <Button
+          type="button"
+          className="numbers"
+          color={"dark grey"}
+          text={number}
+          function={() => updateDisplayValue({number})} />
+      ))}
+
+      {symbols.map((symbol, i) => (
+        <Button
+          type="button"
+          className="symbols"
+          color={"orange"}
+          text={symbol}
+          function={(tempResult) => calculateResult({symbol})} />
+      ))}
+
       <Button
         color="dark grey"
         text="0"
+        className="numbers"
         function={() => updateDisplayValue("0")}
       />
       <Button
         color="dark grey"
         text="1"
+        className="numbers"
         function={() => updateDisplayValue("1")}
       />
       <Button
