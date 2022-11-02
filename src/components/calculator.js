@@ -2,6 +2,7 @@ import { useState } from "react";
 import { division, addition, subtraction, multiply, equals } from "../helpers/math";
 import Display from "./display";
 import Button from "./button";
+import "./calculator.css"
 
 export default function Calculator() {
   const [displayValue, setDisplayValue] = useState(0);
@@ -145,6 +146,8 @@ export default function Calculator() {
       <Display displayValue={displayValue} />
       {numbers.map((number, i) => (
         <Button
+          type="button"
+          className="numbers"
           color={"dark grey"}
           text={number}
           function={() => updateDisplayValue({number})} />
@@ -152,6 +155,8 @@ export default function Calculator() {
 
       {symbols.map((symbol, i) => (
         <Button
+          type="button"
+          className="symbols"
           color={"orange"}
           text={symbol}
           function={(tempResult) => calculateResult({symbol})} />
@@ -160,11 +165,13 @@ export default function Calculator() {
       <Button
         color="dark grey"
         text="0"
+        className="numbers"
         function={() => updateDisplayValue("0")}
       />
       <Button
         color="dark grey"
         text="1"
+        className="numbers"
         function={() => updateDisplayValue("1")}
       />
       <Button
