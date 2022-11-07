@@ -144,12 +144,14 @@ export default function Calculator() {
 
   return (
     <div className="calculatorContainer">
-      <Display displayValue={displayValue} />
+      <div className="displayContainer">
+      <Display displayValue={displayValue}/>
+      <div className="grid-container">
       {numbers.map((number, i) => (
         <Button
           key={`number-${i}`}
           type="button"
-          className="numbers"
+          className="numbers grid-item"
           color={"dark grey"}
           text={number}
           function={() => updateDisplayValue(number)}
@@ -160,12 +162,14 @@ export default function Calculator() {
         <Button
           key={`symbol-${i}`}
           type="button"
-          className="symbols"
+          className="symbols grid-item"
           color={"orange"}
           text={symbol}
           function={() => calculateResult(symbol)}
         />
       ))}
+      </div>
+      </div>
     </div>
   );
 }
