@@ -1,15 +1,14 @@
 .numbers {
-    height: 45px;
-    width: 45px;
+    height: 55px;
+    width: 55px;
     background-color: #505050;
     border-radius: 50%;
     display: inline-block;
-    text-decoration-color: white;
 }
 
 .symbols {
-    height: 45px;
-    width: 45px;
+    height: 55px;
+    width: 55px;
     background-color: #FF9500;
     border-radius: 50%;
     display: inline-block;
@@ -17,9 +16,11 @@
 
 .grid-container {
     display: grid;
-    grid-template-columns: auto auto auto;
-    /* background-color: #2196F3; */
+    grid-template-columns: auto auto auto auto;
+    background-color: black;
     padding: 10px;
+    justify-content: center;
+    border-radius: 20px;
 }
 
 .grid-item {
