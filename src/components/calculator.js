@@ -143,7 +143,7 @@ export default function Calculator() {
   };
 
   return (
-    <div>
+    <div className="calculatorContainer">
       <Display displayValue={displayValue} />
       {numbers.map((number, i) => (
         <Button
