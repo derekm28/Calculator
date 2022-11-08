@@ -7,8 +7,27 @@ import "./calculator.css";
 export default function Calculator() {
   const [displayValue, setDisplayValue] = useState(0);
   const [previousValue, setPreviousValue] = useState(displayValue);
-  const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
-  const symbols = ["+", "-", "*", "/", "=", "AC", "+/-", ".", "%"];
+  const buttonData = [
+    {value : "+/-", type : "symbol"},
+    {value : "AC", type : "symbol"},
+    {value : "+", type : "symbol"},
+    {value : "-", type : "symbol"},
+    {value : "*", type : "symbol"},
+    {value : "/", type : "symbol"},
+    {value : "%", type : "symbol"},
+    {value : ".", type : "symbol"},
+    {value : "=", type : "symbol"},
+    {value : "9", type : "number"},
+    {value : "8", type : "number"},
+    {value : "7", type : "number"},
+    {value : "6", type : "number"},
+    {value : "5", type : "number"},
+    {value : "4", type : "number"},
+    {value : "3", type : "number"},
+    {value : "2", type : "number"},
+    {value : "1", type : "number"},
+    {value : "0", type : "number"}
+  ];
   // TODO: add state for previous value
 
   const calculateResult = (symbol) => {
@@ -148,25 +167,13 @@ export default function Calculator() {
       <Display displayValue={displayValue}/>
       </div>
       <div className="grid-container">
-      {numbers.map((number, i) => (
+      {buttonData.map((button, i) => (
         <Button
-          key={`number-${i}`}
+          key={`button-${i}`}
           type="button"
-          className="numbers grid-item"
-          color={"dark grey"}
-          text={number}
-          function={() => updateDisplayValue(number)}
-        />
-      ))}
-
-      {symbols.map((symbol, i) => (
-        <Button
-          key={`symbol-${i}`}
-          type="button"
-          className="symbols grid-item"
-          color={"orange"}
-          text={symbol}
-          function={() => calculateResult(symbol)}
+          className={ `${button.type === "number" ? "numbers" : "symbols"} grid-item ${button.value === "0" ?  "twoItemButton" : ""}`}
+          text={button.value}
+          function={button.type === "number" ? () => updateDisplayValue(button.value) : () => calculateResult(button.value)}
         />
       ))}
       </div>

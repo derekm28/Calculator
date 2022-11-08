@@ -29,3 +29,7 @@
     text-align: center;
     margin: 10px;
 }
+
+.twoItemButton {
+    grid-column: 1 / 3;
+}

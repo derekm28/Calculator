@@ -6,7 +6,6 @@ export default function Button(props) {
     <div>
       <button
         onClick={props.function}
-        color={props.color}
         className={props.className}>
         {props.text}
       </button>
