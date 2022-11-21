@@ -8,25 +8,25 @@ export default function Calculator() {
   const [displayValue, setDisplayValue] = useState(0);
   const [previousValue, setPreviousValue] = useState(displayValue);
   const buttonData = [
-    {value : "+/-", type : "symbol"},
     {value : "AC", type : "symbol"},
-    {value : "+", type : "symbol"},
-    {value : "-", type : "symbol"},
-    {value : "*", type : "symbol"},
-    {value : "/", type : "symbol"},
+    {value : "+/-", type : "symbol"},
     {value : "%", type : "symbol"},
-    {value : ".", type : "symbol"},
-    {value : "=", type : "symbol"},
-    {value : "9", type : "number"},
-    {value : "8", type : "number"},
-    {value : "7", type : "number"},
-    {value : "6", type : "number"},
+    {value : "/", type : "symbol"},
+    {value : "7", type : "symbol"},
+    {value : "8", type : "symbol"},
+    {value : "9", type : "symbol"},
+    {value : "*", type : "symbol"},
+    {value : "4", type : "symbol"},
     {value : "5", type : "number"},
-    {value : "4", type : "number"},
-    {value : "3", type : "number"},
-    {value : "2", type : "number"},
+    {value : "6", type : "number"},
+    {value : "-", type : "number"},
     {value : "1", type : "number"},
-    {value : "0", type : "number"}
+    {value : "2", type : "number"},
+    {value : "3", type : "number"},
+    {value : "+", type : "number"},
+    {value : "0", type : "number"},
+    {value : ".", type : "number"},
+    {value : "=", type : "number"}
   ];
   // TODO: add state for previous value
 
