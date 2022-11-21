@@ -4,6 +4,7 @@
     background-color: #505050;
     border-radius: 50%;
     display: inline-block;
+    color: white;
 }
 
 .symbols {
@@ -12,6 +13,7 @@
     background-color: #FF9500;
     border-radius: 50%;
     display: inline-block;
+    color: white;
 }
 
 .grid-container {
