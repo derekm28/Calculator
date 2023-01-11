@@ -8,9 +8,9 @@ export default function Calculator() {
   const [displayValue, setDisplayValue] = useState(0);
   const [previousValue, setPreviousValue] = useState(displayValue);
   const buttonData = [
-    {value : "AC", type : "symbol"},
-    {value : "+/-", type : "symbol"},
-    {value : "%", type : "symbol"},
+    {value : "AC", type : "top-symbol"},
+    {value : "+/-", type : "top-symbol"},
+    {value : "%", type : "top-symbol"},
     {value : "/", type : "symbol"},
     {value : "7", type : "number"},
     {value : "8", type : "number"},
@@ -87,15 +87,12 @@ export default function Calculator() {
         }
         break;
 
-      case "clear":
-        if ((<Button text="AC" />)) {
-          updatedDisplayValue = "0";
-        } else {
-        }
+      case "AC":
+        updatedDisplayValue = "0";
         break;
 
       case "0":
-        updatedDisplayValue += inputValue;
+        updatedDisplayValue += "0";
         break;
 
       case "1":
@@ -138,7 +135,12 @@ export default function Calculator() {
         console.log("Error, should not reach default");
     }
 
-    setDisplayValue(updatedDisplayValue);
+    if(updatedDisplayValue.includes(".")){
+      setDisplayValue(parseFloat(updatedDisplayValue));
+    }else{
+      setDisplayValue(parseInt(updatedDisplayValue));
+    }
+
   };
 
   return (
@@ -152,7 +154,8 @@ export default function Calculator() {
             key={`button-${i}`}
             type="button"
             className={`${
-              button.type === "number" ? "numbers" : "symbols"
+              button.type === "number" ? "numbers" :
+              button.type === "symbol" ? "symbols" : "top-symbols"
             } grid-item ${button.value === "0" ? "twoItemButton" : ""}`}
             text={button.value}
             function={

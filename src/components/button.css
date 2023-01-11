@@ -16,6 +16,15 @@
     color: white;
 }
 
+.top-symbols {
+    height: 55px;
+    width: 55px;
+    background-color: #D4D4D2;
+    border-radius: 50%;
+    display: inline-block;
+    color: white;
+}
+
 .grid-container {
     display: grid;
     grid-template-columns: auto auto auto auto;
