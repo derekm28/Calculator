@@ -8,9 +8,9 @@ export default function Calculator() {
   const [displayValue, setDisplayValue] = useState(0);
   const [previousValue, setPreviousValue] = useState(displayValue);
   const buttonData = [
-    {value : "AC", type : "top-symbol"},
-    {value : "+/-", type : "top-symbol"},
-    {value : "%", type : "top-symbol"},
+    {value : "AC", type : "top-symbols"},
+    {value : "+/-", type : "top-symbols"},
+    {value : "%", type : "top-symbols"},
     {value : "/", type : "symbol"},
     {value : "7", type : "number"},
     {value : "8", type : "number"},
@@ -36,6 +36,21 @@ export default function Calculator() {
     // calculate result of prevValue and action
     // TODO: add missing cases
     switch (symbol) {
+      case "AC":
+        setDisplayValue('0');
+        setPreviousValue('0')
+        break;
+
+      case "+/-":
+        setDisplayValue(tempResult * -1);
+        setPreviousValue(tempResult);
+        break;
+
+      case "%":
+        setDisplayValue(tempResult / 100);
+        setPreviousValue(tempResult);
+        break;
+
       case "/":
         tempResult = division(previousValue, parseFloat(displayValue));
         setDisplayValue(tempResult);
@@ -56,7 +71,7 @@ export default function Calculator() {
 
       case "-":
         tempResult = subtraction(previousValue, parseFloat(displayValue));
-        setDisplayValue(tempResult);
+        setDisplayValue(displayValue);
         setPreviousValue(tempResult);
         break;
 
@@ -77,6 +92,7 @@ export default function Calculator() {
 
   const updateDisplayValue = (inputValue) => {
     let updatedDisplayValue = displayValue;
+    let tempResult = displayValue;
 
     switch (inputValue) {
       case ".":
@@ -104,7 +120,12 @@ export default function Calculator() {
         break;
 
       case "3":
-        updatedDisplayValue += "3";
+        if(tempResult){
+          updateDisplayValue('3');
+        }
+        else{
+          updatedDisplayValue += "3";
+        }
         break;
 
       case "4":
