@@ -2,17 +2,58 @@ import { useState } from "react";
 import { division, addition, subtraction, multiply } from "../helpers/math";
 import Display from "./display";
 import Button from "./button";
+import "./calculator.css";
 
 export default function Calculator() {
   const [mathSymbol, setMathSymbol] = useState(null);
   const [displayValue, setDisplayValue] = useState(0);
   const [previousValue, setPreviousValue] = useState(displayValue);
+  const buttonData = [
+    {value : "<=", type : "top-symbols"},
+    {value : "AC", type : "top-symbols"},
+    {value : "%", type : "top-symbols"},
+    {value : "/", type : "symbol"},
+    {value : "7", type : "number"},
+    {value : "8", type : "number"},
+    {value : "9", type : "number"},
+    {value : "*", type : "symbol"},
+    {value : "4", type : "number"},
+    {value : "5", type : "number"},
+    {value : "6", type : "number"},
+    {value : "-", type : "symbol"},
+    {value : "1", type : "number"},
+    {value : "2", type : "number"},
+    {value : "3", type : "number"},
+    {value : "+", type : "symbol"},
+    {value : "+/-", type : "number"},
+    {value : "0", type : "number"},
+    {value : ".", type : "number"},
+    {value : "=", type : "symbol"}
+    
+  ];
+  // TODO: add state for previous value
 
   const calculateResult = () => {
     let tempResult = displayValue;
 
     // calculate result of prevValue and action
-    switch (mathSymbol) {
+    // TODO: add missing cases
+    switch (symbol) {
+      case "AC":
+        setDisplayValue('0');
+        setPreviousValue('0')
+        break;
+
+      case "+/-":
+        setDisplayValue(tempResult * -1);
+        setPreviousValue(tempResult);
+        break;
+
+      case "%":
+        setDisplayValue(tempResult / 100);
+        setPreviousValue(tempResult);
+        break;
+
       case "/":
         tempResult = division(previousValue, displayValue);
         break;
@@ -26,7 +67,14 @@ export default function Calculator() {
         break;
 
       case "-":
-        tempResult = subtraction(previousValue, displayValue);
+        tempResult = subtraction(previousValue, parseFloat(displayValue));
+        setDisplayValue(displayValue);
+        setPreviousValue(tempResult);
+        break;
+
+      case "=":
+        setDisplayValue(tempResult);
+        setPreviousValue(tempResult);
         break;
 
       default:
@@ -41,6 +89,7 @@ export default function Calculator() {
 
   const updateDisplayValue = (inputValue) => {
     let updatedDisplayValue = displayValue;
+    let tempResult = displayValue;
 
     switch (inputValue) {
       case ".":
@@ -51,172 +100,90 @@ export default function Calculator() {
         }
         break;
 
-      case "+/-":
-        updatedDisplayValue *= -1;
-        break;
-
-      case "clear":
-        if ((<Button text="AC" />)) {
-          updatedDisplayValue = "0";
-        } else {
-        }
+      case "AC":
+        updatedDisplayValue = "0";
         break;
 
       case "0":
-        if (inputValue === "0") {
-          updatedDisplayValue += inputValue;
-        }
+        updatedDisplayValue += "0";
         break;
 
       case "1":
-        if (inputValue === "1") {
-          updatedDisplayValue += "1";
-        }
+        updatedDisplayValue += "1";
         break;
 
       case "2":
-        if (inputValue === "2") {
-          updatedDisplayValue += "2";
-        }
+        updatedDisplayValue += "2";
         break;
 
       case "3":
-        if (inputValue === "3") {
+        if(tempResult){
+          updateDisplayValue('3');
+        }
+        else{
           updatedDisplayValue += "3";
         }
         break;
 
       case "4":
-        if (inputValue === "4") {
-          updatedDisplayValue += "4";
-        }
+        updatedDisplayValue += "4";
         break;
 
       case "5":
-        if (inputValue === "5") {
-          updatedDisplayValue += "5";
-        }
+        updatedDisplayValue += "5";
         break;
 
       case "6":
-        if (inputValue === "6") {
-          updatedDisplayValue += "6";
-        }
+        updatedDisplayValue += "6";
         break;
 
       case "7":
-        if (inputValue === "7") {
-          updatedDisplayValue += "7";
-        }
+        updatedDisplayValue += "7";
         break;
 
       case "8":
-        if (inputValue === "8") {
-          updatedDisplayValue += "8";
-        }
+        updatedDisplayValue += "8";
         break;
 
       case "9":
-        if (inputValue === "9") {
-          updatedDisplayValue += "9";
-        }
+        updatedDisplayValue += "9";
         break;
 
       default:
+        console.log("Error, should not reach default");
     }
 
-    setDisplayValue(parseFloat(updatedDisplayValue));
-  };
+    if(updatedDisplayValue.includes(".")){
+      setDisplayValue(parseFloat(updatedDisplayValue));
+    }else{
+      setDisplayValue(parseInt(updatedDisplayValue));
+    }
 
-  const handleSymbolPress = (symbol) => {
-    // set math symbol
-    setMathSymbol(symbol);
-    // set previous value
-    setPreviousValue(displayValue);
-    // clear the display
-    setDisplayValue(0);
   };
 
   return (
-    <div>
-      <Display displayValue={displayValue} />
-      <Button
-        color="dark grey"
-        text="AC"
-        function={() => updateDisplayValue("clear")}
-      />
-      <Button
-        color="dark grey"
-        text="."
-        function={() => updateDisplayValue(".")}
-      />
-      <Button
-        color="dark grey"
-        text="0"
-        function={() => updateDisplayValue("0")}
-      />
-      <Button
-        color="dark grey"
-        text="1"
-        function={() => updateDisplayValue("1")}
-      />
-      <Button
-        color="dark grey"
-        text="2"
-        function={() => updateDisplayValue("2")}
-      />
-      <Button
-        color="dark grey"
-        text="3"
-        function={() => updateDisplayValue("3")}
-      />
-      <Button
-        color="dark grey"
-        text="4"
-        function={() => updateDisplayValue("4")}
-      />
-      <Button
-        color="dark grey"
-        text="5"
-        function={() => updateDisplayValue("5")}
-      />
-      <Button
-        color="dark grey"
-        text="6"
-        function={() => updateDisplayValue("6")}
-      />
-      <Button
-        color="dark grey"
-        text="7"
-        function={() => updateDisplayValue("7")}
-      />
-      <Button
-        color="dark grey"
-        text="8"
-        function={() => updateDisplayValue("8")}
-      />
-      <Button
-        color="light grey"
-        text="9"
-        function={() => updateDisplayValue("9")}
-      />
-      <Button
-        color="dark grey"
-        text="+/-"
-        function={() => updateDisplayValue("+/-")}
-      />
-      <Button color="orange" text="*" function={() => handleSymbolPress("*")} />
-      <Button color="orange" text="+" function={() => handleSymbolPress("+")} />
-      <Button color="orange" text="-" function={() => handleSymbolPress("-")} />
-      <Button color="orange" text="/" function={() => handleSymbolPress("/")} />
-
-      <Button
-        color="orange"
-        text="="
-        function={() => calculateResult(mathSymbol)}
-      />
-      <p>{`mathSymbol: ${mathSymbol}`}</p>
-      <p>{`previousValue: ${previousValue}`}</p>
+    <div className="calculatorContainer">
+      <div className="displayContainer">
+        <Display displayValue={displayValue} />
+      </div>
+      <div className="grid-container">
+        {buttonData.map((button, i) => (
+          <Button
+            key={`button-${i}`}
+            type="button"
+            className={`${
+              button.type === "number" ? "numbers" :
+              button.type === "symbol" ? "symbols" : "top-symbols"
+            } grid-item ${button.value === "0" ? "twoItemButton" : ""}`}
+            text={button.value}
+            function={
+              button.type === "number"
+                ? () => updateDisplayValue(button.value)
+                : () => calculateResult(button.value)
+            }
+          />
+        ))}
+      </div>
     </div>
   );
 }
