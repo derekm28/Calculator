@@ -8,8 +8,8 @@ export default function Calculator() {
   const [displayValue, setDisplayValue] = useState(0);
   const [previousValue, setPreviousValue] = useState(displayValue);
   const buttonData = [
+    {value : "<=", type : "top-symbols"},
     {value : "AC", type : "top-symbols"},
-    {value : "+/-", type : "top-symbols"},
     {value : "%", type : "top-symbols"},
     {value : "/", type : "symbol"},
     {value : "7", type : "number"},
@@ -24,9 +24,11 @@ export default function Calculator() {
     {value : "2", type : "number"},
     {value : "3", type : "number"},
     {value : "+", type : "symbol"},
+    {value : "+/-", type : "number"},
     {value : "0", type : "number"},
     {value : ".", type : "number"},
     {value : "=", type : "symbol"}
+    
   ];
   // TODO: add state for previous value
 
