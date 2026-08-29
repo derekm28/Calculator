@@ -38,7 +38,7 @@ export default function Calculator() {
 
     // calculate result of prevValue and action
     // TODO: add missing cases
-    switch (symbol) {
+    switch (mathSymbol) {
       case "AC":
         setDisplayValue('0');
         setPreviousValue('0')
