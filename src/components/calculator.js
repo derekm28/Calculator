@@ -8,6 +8,9 @@ export default function Calculator() {
   const [mathSymbol, setMathSymbol] = useState(null);
   const [displayValue, setDisplayValue] = useState(0);
   const [previousValue, setPreviousValue] = useState(displayValue);
+  const [equation, setEquation] = useState("");
+  const [isEnteringNextValue, setIsEnteringNextValue] = useState(false);
+
   const buttonData = [
     {value : "<=", type : "top-symbols"},
     {value : "AC", type : "top-symbols"},
@@ -25,7 +28,7 @@ export default function Calculator() {
     {value : "2", type : "number"},
     {value : "3", type : "number"},
     {value : "+", type : "symbol"},
-    {value : "+/-", type : "number"},
+    {value : "+/-", type : "top-symbols"},
     {value : "0", type : "number"},
     {value : ".", type : "number"},
     {value : "=", type : "symbol"}
@@ -33,26 +36,69 @@ export default function Calculator() {
   ];
   // TODO: add state for previous value
 
-  const calculateResult = () => {
+  const calculateResult = (symbol) => {
+    setMathSymbol(symbol);
+    if(['+','-','*','/'].includes(symbol)){
+      // setPreviousValue(displayValue);
+      // setEquation(`${displayValue} ${symbol}`);
+      // setIsEnteringNextValue(true);
+      // return;
+
+      let result = displayValue;
+
+      if(mathSymbol && !isEnteringNextValue){
+        switch(mathSymbol){
+            case "+":
+            result = addition(previousValue, displayValue);
+            break;
+            case "-":
+            result = subtraction(previousValue, displayValue);
+            break;
+            case "*":
+            result = multiply(previousValue, displayValue);
+            break;
+            case "/":
+            result = division(previousValue, displayValue);
+            break;
+            default:
+              break;
+        }
+
+        setDisplayValue(result);
+        setPreviousValue(result);
+        setEquation(`${equation} ${displayValue} ${symbol}`)
+      }
+      else{
+        setPreviousValue(displayValue);
+        setEquation(`${displayValue} ${symbol}`);
+      }
+
+      setMathSymbol(symbol);
+      setIsEnteringNextValue(true);
+      return;
+    }
     let tempResult = displayValue;
 
     // calculate result of prevValue and action
     // TODO: add missing cases
-    switch (mathSymbol) {
+    switch (symbol) {
       case "AC":
         setDisplayValue('0');
-        setPreviousValue('0')
-        break;
+        setPreviousValue('0');
+        setMathSymbol(null);
+        setEquation("");
+        setIsEnteringNextValue(false);
+        return;
 
       case "+/-":
         setDisplayValue(tempResult * -1);
         setPreviousValue(tempResult);
-        break;
+        return;
 
       case "%":
         setDisplayValue(tempResult / 100);
         setPreviousValue(tempResult);
-        break;
+        return;
 
       case "/":
         tempResult = division(previousValue, displayValue);
@@ -73,12 +119,28 @@ export default function Calculator() {
         break;
 
       case "=":
-        setDisplayValue(tempResult);
-        setPreviousValue(tempResult);
-        break;
+        switch (mathSymbol){
+          case "+":
+            tempResult = addition(previousValue, displayValue);
+            break;
 
-      default:
-        // do nothing
+            case "-":
+            tempResult = subtraction(previousValue, displayValue);
+            break;
+
+            case "*":
+            tempResult = multiply(previousValue, displayValue);
+            break;
+
+            case "/":
+            tempResult = division(previousValue, displayValue);
+            break;
+
+            default:
+              break;
+        }
+
+        setEquation(`${equation} ${displayValue} =`);
         break;
     }
 
@@ -88,12 +150,21 @@ export default function Calculator() {
   };
 
   const updateDisplayValue = (inputValue) => {
+
+    if(isEnteringNextValue){
+      const nextValue = inputValue === '.' ? '0.' : inputValue;
+
+      setDisplayValue(nextValue);
+      setIsEnteringNextValue(false);
+      return;
+    }
+    
     let updatedDisplayValue = displayValue;
     let tempResult = displayValue;
 
     switch (inputValue) {
       case ".":
-        if (displayValue.includes(".")) {
+        if (String(displayValue).includes(".")) {
           // do nothing
         } else {
           updatedDisplayValue += inputValue;
@@ -117,12 +188,7 @@ export default function Calculator() {
         break;
 
       case "3":
-        if(tempResult){
-          updateDisplayValue('3');
-        }
-        else{
-          updatedDisplayValue += "3";
-        }
+        updatedDisplayValue += "3";
         break;
 
       case "4":
@@ -154,7 +220,7 @@ export default function Calculator() {
     }
 
     if(updatedDisplayValue.includes(".")){
-      setDisplayValue(parseFloat(updatedDisplayValue));
+      setDisplayValue(updatedDisplayValue);
     }else{
       setDisplayValue(parseInt(updatedDisplayValue));
     }
@@ -164,7 +230,9 @@ export default function Calculator() {
   return (
     <div className="calculatorContainer">
       <div className="displayContainer">
-        <Display displayValue={displayValue} />
+        <Display displayValue={displayValue} 
+        equation={equation}
+        />
       </div>
       <div className="grid-container">
         {buttonData.map((button, i) => (
