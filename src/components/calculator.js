@@ -34,15 +34,10 @@ export default function Calculator() {
     {value : "=", type : "symbol"}
     
   ];
-  // TODO: add state for previous value
 
   const calculateResult = (symbol) => {
     setMathSymbol(symbol);
     if(['+','-','*','/'].includes(symbol)){
-      // setPreviousValue(displayValue);
-      // setEquation(`${displayValue} ${symbol}`);
-      // setIsEnteringNextValue(true);
-      // return;
 
       let result = displayValue;
 
@@ -72,15 +67,11 @@ export default function Calculator() {
         setPreviousValue(displayValue);
         setEquation(`${displayValue} ${symbol}`);
       }
-
-      setMathSymbol(symbol);
       setIsEnteringNextValue(true);
       return;
     }
     let tempResult = displayValue;
 
-    // calculate result of prevValue and action
-    // TODO: add missing cases
     switch (symbol) {
       case "AC":
         setDisplayValue('0');
@@ -99,24 +90,6 @@ export default function Calculator() {
         setDisplayValue(tempResult / 100);
         setPreviousValue(tempResult);
         return;
-
-      case "/":
-        tempResult = division(previousValue, displayValue);
-        break;
-
-      case "*":
-        tempResult = multiply(previousValue, displayValue);
-        break;
-
-      case "+":
-        tempResult = addition(previousValue, displayValue);
-        break;
-
-      case "-":
-        tempResult = subtraction(previousValue, parseFloat(displayValue));
-        setDisplayValue(displayValue);
-        setPreviousValue(tempResult);
-        break;
 
       case "=":
         switch (mathSymbol){
@@ -141,6 +114,8 @@ export default function Calculator() {
         }
 
         setEquation(`${equation} ${displayValue} =`);
+        setMathSymbol(null);
+        setIsEnteringNextValue(true);
         break;
     }
 
@@ -160,7 +135,6 @@ export default function Calculator() {
     }
     
     let updatedDisplayValue = displayValue;
-    let tempResult = displayValue;
 
     switch (inputValue) {
       case ".":
@@ -169,10 +143,6 @@ export default function Calculator() {
         } else {
           updatedDisplayValue += inputValue;
         }
-        break;
-
-      case "AC":
-        updatedDisplayValue = "0";
         break;
 
       case "0":
