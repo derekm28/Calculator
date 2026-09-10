@@ -34,45 +34,14 @@ export default function Calculator() {
     {value : "=", type : "symbol"}
     
   ];
+  // TODO: add state for previous value
 
-  const calculateResult = (symbol) => {
-    setMathSymbol(symbol);
-    if(['+','-','*','/'].includes(symbol)){
-
-      let result = displayValue;
-
-      if(mathSymbol && !isEnteringNextValue){
-        switch(mathSymbol){
-            case "+":
-            result = addition(previousValue, displayValue);
-            break;
-            case "-":
-            result = subtraction(previousValue, displayValue);
-            break;
-            case "*":
-            result = multiply(previousValue, displayValue);
-            break;
-            case "/":
-            result = division(previousValue, displayValue);
-            break;
-            default:
-              break;
-        }
-
-        setDisplayValue(result);
-        setPreviousValue(result);
-        setEquation(`${equation} ${displayValue} ${symbol}`)
-      }
-      else{
-        setPreviousValue(displayValue);
-        setEquation(`${displayValue} ${symbol}`);
-      }
-      setIsEnteringNextValue(true);
-      return;
-    }
+  const calculateResult = () => {
     let tempResult = displayValue;
 
-    switch (symbol) {
+    // calculate result of prevValue and action
+    // TODO: add missing cases
+    switch (mathSymbol) {
       case "AC":
         setDisplayValue('0');
         setPreviousValue('0');
@@ -89,13 +58,7 @@ export default function Calculator() {
       case "%":
         setDisplayValue(tempResult / 100);
         setPreviousValue(tempResult);
-        return;
-
-      case "=":
-        switch (mathSymbol){
-          case "+":
-            tempResult = addition(previousValue, displayValue);
-            break;
+        break;
 
             case "-":
             tempResult = subtraction(previousValue, displayValue);
@@ -105,17 +68,23 @@ export default function Calculator() {
             tempResult = multiply(previousValue, displayValue);
             break;
 
-            case "/":
-            tempResult = division(previousValue, displayValue);
-            break;
+      case "+":
+        tempResult = addition(previousValue, displayValue);
+        break;
 
-            default:
-              break;
-        }
+      case "-":
+        tempResult = subtraction(previousValue, parseFloat(displayValue));
+        setDisplayValue(displayValue);
+        setPreviousValue(tempResult);
+        break;
 
-        setEquation(`${equation} ${displayValue} =`);
-        setMathSymbol(null);
-        setIsEnteringNextValue(true);
+      case "=":
+        setDisplayValue(tempResult);
+        setPreviousValue(tempResult);
+        break;
+
+      default:
+        // do nothing
         break;
     }
 
