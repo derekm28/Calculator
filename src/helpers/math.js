@@ -1,6 +1,6 @@
 module.exports = {
   addition: (x, y) => {
-    return x + y;
+    return Number(x) + Number(y);
   },
   subtraction: (x, y) => {
     return x - y;
