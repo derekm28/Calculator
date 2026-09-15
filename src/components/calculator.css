@@ -19,11 +19,32 @@ body {
 }
 
 .displayContainer {
-    text-align: center;
-    border: 1rem;
-    border-style: solid;
-    border-width: medium;
-    border-radius: 10px;
-    margin: 10px;
-    font-size: larger;
+    min-height: 96px;
+    padding: 16px 12px 12px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    overflow: hidden;
+    color: white;
+    background-color: #1c1c1e;
+    border-radius: 12px;
+    margin: 0 0 8px;
+}
+
+.equation {
+    min-height: 22px;
+    color: #8e8e93;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: right;
+}
+
+.result {
+    color: #ffffff;
+    font-size: 48px;
+    font-weight: 300;
+    line-height: 52px;
+    text-align: right;
 }

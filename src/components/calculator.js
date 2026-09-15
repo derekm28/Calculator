@@ -36,12 +36,20 @@ export default function Calculator() {
   ];
   // TODO: add state for previous value
 
-  const calculateResult = () => {
+  const calculateResult = (symbol) => {
     let tempResult = displayValue;
+
+    if (["+", "-", "*", "/"].includes(symbol)) {
+      setPreviousValue(displayValue);
+      setMathSymbol(symbol);
+      setEquation(`${displayValue} ${symbol}`);
+      setIsEnteringNextValue(true);
+      return;
+    }
 
     // calculate result of prevValue and action
     // TODO: add missing cases
-    switch (mathSymbol) {
+    switch (symbol) {
       case "AC":
         setDisplayValue('0');
         setPreviousValue('0');
@@ -60,6 +68,10 @@ export default function Calculator() {
         setPreviousValue(tempResult);
         break;
 
+            case "/":
+            tempResult = division(previousValue, displayValue);
+            break;
+
             case "-":
             tempResult = subtraction(previousValue, displayValue);
             break;
@@ -72,15 +84,31 @@ export default function Calculator() {
         tempResult = addition(previousValue, displayValue);
         break;
 
-      case "-":
-        tempResult = subtraction(previousValue, parseFloat(displayValue));
-        setDisplayValue(displayValue);
-        setPreviousValue(tempResult);
-        break;
-
       case "=":
-        setDisplayValue(tempResult);
-        setPreviousValue(tempResult);
+        switch (mathSymbol){
+            case "+":
+            tempResult = addition(previousValue, displayValue);
+            break;
+
+            case "-":
+            tempResult = subtraction(previousValue, displayValue);
+            break;
+
+            case "*":
+            tempResult = multiply(previousValue, displayValue);
+            break;
+
+            case "/":
+            tempResult = division(previousValue, displayValue);
+            break;
+
+            default:
+              break;
+        }
+
+        setEquation(`${equation} ${displayValue} =`);
+        setMathSymbol(null);
+        setIsEnteringNextValue(true);
         break;
 
       default:
